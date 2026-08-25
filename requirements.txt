@@ -1,20 +1,14 @@
 streamlit==1.62.0
+ultralytics==8.4.33
+opencv-python
+numpy
+Pillow
 
-# CPU-only PyTorch.
-# The "+cpu" local version exists ONLY on PyTorch's own index, so pinning it
-# forces pip to the ~200 MB CPU wheel. Without it, PyPI serves the CUDA build
-# for Linux (multi-GB of nvidia-* deps), which blows Streamlit Cloud's disk
-# and build-time limits. Verified: cp312 and cp313 linux wheels both exist.
+# torch is not imported by app.py, but ultralytics needs it to run the model.
+# The "+cpu" suffix is the important part: that local version exists only on
+# PyTorch's own index, which forces the ~200 MB CPU wheel. Plain "torch" on
+# Linux pulls the CUDA build plus multi-GB nvidia-* packages and the hosted
+# build runs out of room.
 --extra-index-url https://download.pytorch.org/whl/cpu
 torch==2.6.0+cpu
 torchvision==0.21.0+cpu
-
-ultralytics==8.4.33
-
-# NOTE: ultralytics itself depends on opencv-python (not headless), so the
-# non-headless build gets installed regardless. That one needs libGL at import
-# time, which is why packages.txt ships libgl1.
-opencv-python-headless>=4.9,<5
-
-Pillow>=10,<13
-numpy>=1.26,<3
