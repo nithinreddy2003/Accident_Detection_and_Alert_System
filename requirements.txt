@@ -1,6 +1,11 @@
 streamlit==1.62.0
 ultralytics==8.4.33
-opencv-python
+
+# Stay on the 4.x line. Unpinned, this resolved to opencv-python 5.0.0.93 — a
+# brand-new major release that ultralytics 8.4.33 predates and is not tested
+# against. "<5" resolves to 4.14.0.94.
+opencv-python>=4.9,<5
+
 numpy
 Pillow
 
