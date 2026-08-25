@@ -1,0 +1,22 @@
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.venv/
+venv/
+.env
+.streamlit/secrets.toml
+.DS_Store
+
+# ---------------------------------------------------------------------------
+# The original FastAPI + MongoDB reference project. NOT part of the Streamlit
+# app, and it must never be pushed:
+#   - ml_model/epoch10.pt and epoch80.pt are 148 MB each, over GitHub's 100 MB
+#     hard limit, so the push would be rejected outright.
+#   - .env in there holds a live MongoDB connection string and Gmail password.
+# Total ~398 MB.
+# ---------------------------------------------------------------------------
+Accident Detection System/
+
+# Spare training checkpoints — only ml_model/best.pt is needed to run the app.
+ml_model/epoch*.pt
+ml_model/last.pt

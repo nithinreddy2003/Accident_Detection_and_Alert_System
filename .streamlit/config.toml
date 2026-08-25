@@ -1,0 +1,12 @@
+[theme]
+base = "dark"
+primaryColor = "#8b5cf6"
+backgroundColor = "#0a0e1a"
+secondaryBackgroundColor = "#151b2e"
+textColor = "#e8ecf5"
+font = "sans serif"
+
+[server]
+# Kept modest on purpose: video is decoded and run through YOLO frame by frame,
+# so a large upload can exhaust the memory available on hosted free tiers.
+maxUploadSize = 100
