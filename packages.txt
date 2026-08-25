@@ -1,11 +1,1 @@
-# apt packages for the hosted build.
-#
-# Needed because ultralytics depends on opencv-python (the non-headless build),
-# which loads libGL.so.1 at import time. libgl1 provides it.
-#
-# Do NOT add libglib2.0-0 here. The build image is Debian trixie but also has a
-# bullseye repo configured, so apt resolves that name to the bullseye version,
-# which depends on libffi7/libpcre3 — packages that do not exist in trixie. The
-# result is "Unable to correct problems, you have held broken packages" and the
-# whole install aborts. On trixie the glib package is named libglib2.0-0t64.
 libgl1

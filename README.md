@@ -28,6 +28,18 @@ non-headless build), which needs `libGL.so.1` at import time. Without it a
 hosted deploy dies with `ImportError: libGL.so.1: cannot open shared object
 file`, even though `opencv-python-headless` is also installed.
 
+Two traps in that file, both learned the hard way:
+
+1. **No comments.** Streamlit Cloud feeds every line straight to
+   `apt-get install`, so a `#` comment becomes a package name and the install
+   fails with `E: Unable to locate package #`. Bare package names only, one per
+   line.
+2. **Do not add `libglib2.0-0`.** The build image is Debian trixie but also has
+   a bullseye repo configured, so that name resolves to the bullseye version,
+   which depends on `libffi7`/`libpcre3` — absent in trixie. apt then reports
+   `held broken packages` and aborts everything. If glib ever is genuinely
+   needed, the trixie name is `libglib2.0-0t64`.
+
 ## ▶️ Run locally
 
 ```bash
